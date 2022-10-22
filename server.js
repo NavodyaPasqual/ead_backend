@@ -10,7 +10,7 @@ const authRoute = require('./src/routes/userLoginRegiRoutes');
 const postRoute = require('./src/routes/userProfileRoutes');
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8081;
 
 /**
  * Get MONGODB_URI from .env
@@ -42,7 +42,7 @@ application.use(express.json());
 application.use('/api/user', authRoute);
 application.use('/api/user/profile', postRoute);
 
-application.listen(3000, () => {
+application.listen(8081, () => {
     console.log('######################################################');
     console.log(`Server is ON and running on PORT : ${PORT}`);
     console.log('...Wait DB connecting...');
