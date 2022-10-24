@@ -1,19 +1,9 @@
 const router =require('express').Router();
-const verify = require('./verifyToken');
+//const verify = require('./verifyToken');
 const User = require('../model/User');
 
-//Making route private with verify
-router.get('/route', verify, (req, res) => {
-    res.json({
-        posts: {
-            title: 'My fist post',
-            description: "random data you shouldnt access"
-        }
-    })
-})
-
 // Get all profiles
-router.get('/', verify, (req, res) => {
+router.get('/', (req, res) => {
     let order = req.query.order ? req.query.order : 'asc'
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id'
 
@@ -30,7 +20,7 @@ router.get('/', verify, (req, res) => {
 });
 
 // Get a specific profile
-router.get('/:id', verify, (req, res) => {
+router.get('/:id', (req, res) => {
     User.findById(req.params.id, (error, data) =>{
         if (error) {
             return next(error)
@@ -41,17 +31,17 @@ router.get('/:id', verify, (req, res) => {
 });
 
 // Delete a profile
-router.delete('/delete/:id',verify, async(req, res) => {
+router.delete('/delete/:id', async(req, res) => {
     const id  = req.params.id
     await User.findByIdAndRemove(id).exec()
     res.send("User Deleted successfully");
 });
 
 // Update a profile
-router.put('/update/:id',verify, async(req, res) => {
+router.put('/update/:id', async(req, res) => {
     const { slug } = req.params
-    const {name,number,email,password} = req.body
-    User.findOneAndUpdate({slug}, {name,number,email,password}, {new: true})
+    const {name,number,email,nic,password} = req.body
+    User.findOneAndUpdate({slug}, {name,number,email,nic,password}, {new: true})
         .exec((err,topic) => {
             if(err) console.log(err)
             res.json(topic);

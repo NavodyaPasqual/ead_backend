@@ -1,32 +1,26 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    name: {
+    id: {
         type: String,
         required: true,
         min: 3,
         max:255
     },
-    email: {
+    nic: {
         type: String,
         required: true,
         min: 6,
         max:255
     },
-    nic: {
+    fuelStation: {
         type: String,
         required: true
     },
-    number: {
-        type: Number,
-        required: true
-    },
-    password: {
+    status: {
         type: String,
-        required: true,
-        min: 6,
-        max:1024
+        default: "Leave" //Joined, ExitBefore, ExitAfter, Leave
     }
 },{timestamps: true})
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Queue', userSchema);

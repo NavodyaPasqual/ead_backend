@@ -27,6 +27,7 @@ router.post('/register', async(req, res) => {
         name: req.body.name,
         number: req.body.number,
         email: req.body.email,
+        nic: req.body.nic,
         password: hashedPassword
     });
     try {

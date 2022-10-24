@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const application = express();
 
 //import routes
-const authRoute = require('./src/routes/userLoginRegiRoutes');
-const postRoute = require('./src/routes/userProfileRoutes');
+const userAuthRoute = require('./src/routes/userLoginRegiRoutes');
+const userPostRoute = require('./src/routes/userProfileRoutes');
+const shedRoute = require('./src/routes/shedRoutes');
+const queueRoute = require('./src/routes/queueRoute');
 dotenv.config();
 
 const PORT = process.env.PORT || 8081;
@@ -39,12 +41,13 @@ application.get('/', (req, res) => {
 //Middleware
 application.use(express.json());
 //Route middleware
-application.use('/api/user', authRoute);
-application.use('/api/user/profile', postRoute);
+application.use('/api/user', userAuthRoute);
+application.use('/api/user/profile', userPostRoute);
+application.use('/api/shed', shedRoute);
+application.use('/api/queue', queueRoute);
 
 application.listen(8081, () => {
     console.log('######################################################');
     console.log(`Server is ON and running on PORT : ${PORT}`);
     console.log('...Wait DB connecting...');
 });
-
