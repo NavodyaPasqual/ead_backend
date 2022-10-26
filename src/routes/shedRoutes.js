@@ -1,7 +1,7 @@
 const router =require('express').Router();
 const Shed = require('../model/Shed');
 
-//Shed REGISTRATION
+//Shed registration
 router.post('/register', async(req, res) => {
     if(req.body) {
         const shed = new Shed(req.body);
@@ -43,11 +43,22 @@ router.get('/:id', async(req, res) => {
     })
 });
 
-//update specific shed
+//update diesel
 router.put('/update/:id', async(req, res) => {
     const { slug } = req.params
-    const {shedID,regNo,name,address,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
-    Shed.findOneAndUpdate({slug}, {shedID,regNo,name,address,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime}, {new: true})
+    const {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
+    Shed.findOneAndUpdate({slug}, {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime}, {new: true})
+        .exec((err,shed) => {
+            if(err) console.log(err)
+            res.json(shed);
+        })
+});
+
+//update petrol
+router.put('/update/:id', async(req, res) => {
+    const { slug } = req.params
+    const {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
+    Shed.findOneAndUpdate({slug}, {regNo,name,address,shedContactNo,petrolArrivalTime,petrolAvailable,petrolFinishTime}, {new: true})
         .exec((err,shed) => {
             if(err) console.log(err)
             res.json(shed);

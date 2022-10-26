@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    shedID: {
-        type: String,
-        required: true,
-        min: 3,
-        max:255
-    },
     regNo: {
         type: String,
         required: true,
@@ -25,9 +19,13 @@ const userSchema = new mongoose.Schema({
         min: 6,
         max:255
     },
+    shedContactNo: {
+        type: String,
+        required: true,
+        trim: true
+    },
     dieselArrivalTime: {
         type: Date,
-        required: true
     },
     dieselAvailable: {
         type: Boolean,
@@ -35,11 +33,9 @@ const userSchema = new mongoose.Schema({
     },
     dieselFinishTime: {
         type: Date,
-        required: true
     },
     petrolArrivalTime: {
         type: Date,
-        required: true
     },
     petrolAvailable: {
         type: Boolean,
@@ -47,7 +43,6 @@ const userSchema = new mongoose.Schema({
     },
     petrolFinishTime: {
         type: Date,
-        required: true
     }
 },{timestamps: true})
 
