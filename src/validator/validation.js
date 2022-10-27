@@ -7,7 +7,7 @@ const registrationValidation = data => {
         name: Joi.string().min(3).required(),
         email: Joi.string().min(6).required().email(),
         password: Joi.string().min(6).required(),
-        number: Joi.number().required(),
+        number: Joi.string().required(),
         nic: Joi.string().required()
     };
     return Joi.validate(data, schema);
