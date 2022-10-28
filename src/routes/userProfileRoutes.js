@@ -34,7 +34,9 @@ router.get('/:id', (req, res) => {
 router.delete('/delete/:id', async(req, res) => {
     const id  = req.params.id
     await User.findByIdAndRemove(id).exec()
-    res.send("User Deleted successfully");
+    res.status(200).json({
+        success: true, msg: 'Successfully deleted'
+    })
 });
 
 // Update a profile
