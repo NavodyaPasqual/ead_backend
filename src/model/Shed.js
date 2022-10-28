@@ -25,24 +25,24 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     dieselArrivalTime: {
-        type: Date,
+        type: String,
     },
     dieselAvailable: {
-        type: Boolean,
+        type: String,
         default: true
     },
     dieselFinishTime: {
-        type: Date,
+        type: String,
     },
     petrolArrivalTime: {
-        type: Date,
+        type: String,
     },
     petrolAvailable: {
-        type: Boolean,
+        type: String,
         default: true
     },
     petrolFinishTime: {
-        type: Date,
+        type: String,
     }
 },{timestamps: true})
 

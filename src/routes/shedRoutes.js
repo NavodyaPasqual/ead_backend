@@ -43,16 +43,17 @@ router.get('/:id', async(req, res) => {
     })
 });
 
-//update diesel
+//update fuel
 router.put('/update/:id', async(req, res) => {
     const { slug } = req.params
-    const {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
-    Shed.findOneAndUpdate({slug}, {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime, petrolArrivalTime,petrolAvailable,petrolFinishTime}, {new: true})
+    const {dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
+    Shed.findOneAndUpdate({slug}, {dieselArrivalTime,dieselAvailable,dieselFinishTime, petrolArrivalTime,petrolAvailable,petrolFinishTime}, {new: true})
         .exec((err,shed) => {
             if(err) console.log(err)
-            res.json(shed);
+            res.status(200).json({success: true, msg: 'Successfully updated'});
         })
 });
+
 
 //update petrol
 /*router.put('/update/:id', async(req, res) => {
@@ -69,7 +70,9 @@ router.put('/update/:id', async(req, res) => {
 router.delete('/delete/:id', async(req, res) => {
     const id  = req.params.id
     await Shed.findByIdAndRemove(id).exec()
-    res.send("Deleted");
+    res.status(200).json({
+        success: true, msg: 'Successfully deleted'
+    })
 });
 
 module.exports = router;
