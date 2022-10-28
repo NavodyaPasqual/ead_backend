@@ -41,13 +41,21 @@ router.delete('/delete/:id', async(req, res) => {
 
 // Update a profile
 router.put('/update/:id', async(req, res) => {
-    const { slug } = req.params
-    const {name,number,email,nic,password} = req.body
-    User.findOneAndUpdate({slug}, {name,number,email,nic,password}, {new: true})
-        .exec((err,topic) => {
-            if(err) console.log(err)
-            res.json(topic);
-        })
+
+    try {
+        let updateUser = await User.findById(req.params.id);
+        if(!updateUser) {
+            return res.status(400).json({
+                success: false, msg: 'User does not exit'
+            });
+        }
+        updateUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
+        res.status(200).json({success: true, msg: 'Successfully updated'});
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
