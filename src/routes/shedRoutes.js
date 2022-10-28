@@ -47,7 +47,7 @@ router.get('/:id', async(req, res) => {
 router.put('/update/:id', async(req, res) => {
     const { slug } = req.params
     const {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
-    Shed.findOneAndUpdate({slug}, {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime}, {new: true})
+    Shed.findOneAndUpdate({slug}, {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime, petrolArrivalTime,petrolAvailable,petrolFinishTime}, {new: true})
         .exec((err,shed) => {
             if(err) console.log(err)
             res.json(shed);
@@ -55,7 +55,7 @@ router.put('/update/:id', async(req, res) => {
 });
 
 //update petrol
-router.put('/update/:id', async(req, res) => {
+/*router.put('/update/:id', async(req, res) => {
     const { slug } = req.params
     const {regNo,name,address,shedContactNo,dieselArrivalTime,dieselAvailable,dieselFinishTime,petrolArrivalTime,petrolAvailable,petrolFinishTime} = req.body
     Shed.findOneAndUpdate({slug}, {regNo,name,address,shedContactNo,petrolArrivalTime,petrolAvailable,petrolFinishTime}, {new: true})
@@ -63,7 +63,7 @@ router.put('/update/:id', async(req, res) => {
             if(err) console.log(err)
             res.json(shed);
         })
-});
+});*/
 
 //delete specific shed 
 router.delete('/delete/:id', async(req, res) => {
